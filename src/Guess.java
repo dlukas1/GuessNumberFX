@@ -18,55 +18,44 @@ public class Guess extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        //Создаем сцену
+        //Create scene
         StackPane stack = new StackPane();
         Scene scene = new Scene(stack, 400, 200);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Guess Number"); //Название
-        primaryStage.setResizable(false); //Постоянный размен
+        primaryStage.setTitle("-Guess Number-"); //Title
+        primaryStage.setResizable(false); //Window not resizable
 
-        //Поле ввода текста
-        TextField field1 = new TextField("Sisesta number 1 - 100:");
+        //Text field
+        TextField field1 = new TextField("Sisesta number 1 - 100 : ");
         stack.getChildren().add(field1);
 
-        //Создаем кнопку
+
+        //Create button GO
         Button btn = new Button();
         btn.setText("Go!");
-        stack.getChildren().add(btn);//добавим на поле
+        stack.getChildren().add(btn);//Add to stack
         btn.setTranslateY(50);
 
-        //Кнопка "Играть еще"
-        Button btn1 = new Button();
-        btn1.setText("Play again");
-        btn1.setTranslateY(50);
-        btn1.setTranslateX(100);
-
-        //Инструкция над полем ввода (Удалить после начала игры)
+        //Directions how to play(remove after game started)
         Label l = new Label("Proovi välja arvata number 1st 100ni! Sul on 5 katset!");
         stack.getChildren().add(l);
         l.setTranslateY(-70);
 
+        Label copyrights = new Label("Dmitri Lukas © 2016");
+        stack.getChildren().add(copyrights);
+        copyrights.setTranslateY(95);
+        copyrights.setTranslateX(140);
 
-       //Комментарии внизу - больше, меньше, угадал, проиграл
+       //Text bellow - less, more, won
         final Text actiontarget = new Text();
         stack.getChildren().add(actiontarget);
         actiontarget.setTranslateY(80);
 
+        //Start game
 
-
-        //Кнопка перезапускает игру после проигрыша
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event){}
-            //dodelat'
-
-
-        });
-
-        //Начинем игру
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
-            int i = 0; //0 попыток использовано
+            int i = 0; //0 tries used
             Engine engineObject = new Engine();
 
             @Override
@@ -75,47 +64,42 @@ public class Guess extends Application{
                 int sisNum;
                 int tryNumber = 4;
                 btn.setText("Go");
-                stack.getChildren().remove(l);//удаляем инструкцию после начала игры
+                stack.getChildren().remove(l);//remove directions
 
-
-
-
-
-                //при проигрыше, если больше 5 попыток:
+                //loose if more then 5 tries
                 if(i >= tryNumber){
                     actiontarget.setFill(Color.RED);
                     actiontarget.setText("You lost the game! Correct answer was " + engineObject.rndNum);
-                    btn.setText("Start again");
+                    btn.setText("Sisesta number ja mängi uuesti"); //convert button GO to PLAY AGAIN
+                    field1.clear();
                     engineObject.GenerateNumber();
                     i = 0;
-                    //поменять текст на НАЧАТЬ ЗАНОВО и
-                    // stack.getChildren().remove(btn);
-                    //stack.getChildren().add(btn1);
-                    //knopka start new game
 
-
-
-                } else {
-                    //proverka
+                } else
+                    {
+                    //check entered number
                     boolean isNumber= engineObject.kasNumber(field1.getText());
                     if(isNumber == false){
-                        actiontarget.setText("See ei ole number, sisesta number!");
+                        actiontarget.setText("See ei ole number, sisesta number!"); //if not a number
                     } else{
-                        sisNum = Integer.parseInt(field1.getText());
+                        sisNum = Integer.parseInt(field1.getText()); //if number - convert to int
 
-                        if(sisNum>100) {
-                            actiontarget.setText("Number ei saa olla suurem kui 100!");
+                        if(sisNum>100 || sisNum <0) {
+                            actiontarget.setText("Number peab olla vahemikus 0 - 100 !"); //
                         } else{
                             i++;
                             String answer = engineObject.Check(sisNum);
 
-                            //Если угадал
+                            //if guessed
                             if(answer == "Võit!"){
                                 actiontarget.setFill(Color.RED);
                                 actiontarget.setText("Yoy won! Congratulations!");
-                                //stack.getChildren().remove(btn);
+                                btn.setText("Sisesta number ja mängi uuesti"); //convert button GO to PLAY AGAIN
+                                field1.clear();
+                                engineObject.GenerateNumber();
+                                i = 0;
 
-                                //если не угадал
+                                //if not guessed number
                             }
                             else {
                                 actiontarget.setFill(Color.BLUE);
