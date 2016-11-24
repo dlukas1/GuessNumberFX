@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43b7107a-4b83-4a90-963d-0c2a9a883f87" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GuessNumberAwt/Guess$1.class" afterPath="$PROJECT_DIR$/out/production/GuessNumberAwt/Guess$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GuessNumberAwt/Guess.class" afterPath="$PROJECT_DIR$/out/production/GuessNumberAwt/Guess.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Engine.java" afterPath="$PROJECT_DIR$/src/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Guess.java" afterPath="$PROJECT_DIR$/src/Guess.java" />
     </list>
     <ignored path="GuessNumberAwt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -443,6 +439,14 @@
       <option name="presentableId" value="Default" />
       <updated>1478588350824</updated>
     </task>
+    <task id="LOCAL-00001" summary="Table content ready">
+      <created>1479980492486</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1479980492486</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -485,6 +489,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Table content ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Table content ready" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
