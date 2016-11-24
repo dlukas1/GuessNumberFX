@@ -10,9 +10,9 @@ public class Engine {
         GenerateNumber();
     }
 
-    public void GenerateNumber() {
+    public void GenerateNumber() {  //constructor creates rndNum
         this.rndNum = (int) (Math.random() * 100);
-    } //constructor creates rndNum
+    }
 
     public String Check(int a) {
         if (a > this.rndNum) {

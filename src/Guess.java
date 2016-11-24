@@ -8,10 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Node;
 
 
 public class Guess extends Application{
@@ -24,6 +28,12 @@ public class Guess extends Application{
         primaryStage.setScene(scene);
         primaryStage.setTitle("-Guess Number-"); //Title
         primaryStage.setResizable(false); //Window not resizable
+
+        //make a bet before start
+        TextField betField = new TextField("Sinu panus:");
+        stack. getChildren().add(betField);
+
+
 
         //Text field
         TextField field1 = new TextField("Sisesta number 1 - 100 : ");
@@ -62,9 +72,11 @@ public class Guess extends Application{
             public void handle(ActionEvent event) {
 
                 int sisNum;
-                int tryNumber = 4;
+                int tryNumber = 5;
+
                 btn.setText("Go");
-                stack.getChildren().remove(l);//remove directions
+                //remove directions
+                stack.getChildren().remove(l);
 
                 //loose if more then 5 tries
                 if(i >= tryNumber){
