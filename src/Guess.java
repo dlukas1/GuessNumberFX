@@ -23,11 +23,12 @@ public class Guess extends Application{
     public void start(Stage primaryStage) throws Exception {
 
         //Create scene
-        StackPane stack = new StackPane();
-        Scene scene = new Scene(stack, 400, 200);
-        primaryStage.setScene(scene);
+            StackPane stack = new StackPane();
+            Scene scene = new Scene(stack, 400, 200);
+            primaryStage.setScene(scene);
         primaryStage.setTitle("-Guess Number-"); //Title
         primaryStage.setResizable(false); //Window not resizable
+        scene.getStylesheets().add((getClass().getResource("style.css")).toExternalForm());
 
         //make a bet before start
         TextField betField = new TextField("Sinu panus:");
