@@ -1,6 +1,7 @@
 /**
  * Created by Dmitry on 8.11.2016.
  */
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -15,37 +17,50 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionListener;
+
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Node;
 
 
-public class Guess extends Application{
+public class Guess extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         //Create scene
-            StackPane stack = new StackPane();
-            Scene scene = new Scene(stack, 400, 200);
-            primaryStage.setScene(scene);
+        StackPane stack = new StackPane();
+
+        Scene scene = new Scene(stack, 400, 200);
+
+        primaryStage.setScene(scene);
+
         primaryStage.setTitle("-Guess Number-"); //Title
+
+        primaryStage.getIcons().add(new Image("icon.png"));
         primaryStage.setResizable(false); //Window not resizable
         scene.getStylesheets().add((getClass().getResource("style.css")).toExternalForm());
 
         //make a bet before start
         TextField betField = new TextField("Sinu panus:");
-        stack. getChildren().add(betField);
+        stack.getChildren().add(betField);
 
 
-
-        //Text field
+        //Text field, width in css
         TextField field1 = new TextField("Sisesta number 1 - 100 : ");
         stack.getChildren().add(field1);
-
+        field1.setPrefWidth(100);
+        field1.requestFocus();
+      /*  field1.setOnKeyPressed(event -> {
+            if(event.getCode().equals(KeyCode.ENTER)) {
+                Engine.Check()
+            }
+        });*/
 
         //Create button GO
         Button btn = new Button();
         btn.setText("Go!");
         stack.getChildren().add(btn);//Add to stack
         btn.setTranslateY(50);
+
 
         //Directions how to play(remove after game started)
         Label l = new Label("Proovi välja arvata number 1st 100ni! Sul on 5 katset!");
@@ -57,12 +72,14 @@ public class Guess extends Application{
         copyrights.setTranslateY(95);
         copyrights.setTranslateX(140);
 
-       //Text bellow - less, more, won
+        //Text bellow - less, more, won
         final Text actiontarget = new Text();
         stack.getChildren().add(actiontarget);
         actiontarget.setTranslateY(80);
+        actiontarget.setId("actiontarget");
 
         //Start game
+
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -73,14 +90,15 @@ public class Guess extends Application{
             public void handle(ActionEvent event) {
 
                 int sisNum;
-                int tryNumber = 5;
+                int tryNumber = 4;
 
                 btn.setText("Go");
+                btn.defaultButtonProperty().bind(btn.focusedProperty());
                 //remove directions
                 stack.getChildren().remove(l);
 
                 //loose if more then 5 tries
-                if(i >= tryNumber){
+                if (i >= tryNumber) {
                     actiontarget.setFill(Color.RED);
                     actiontarget.setText("You lost the game! Correct answer was " + engineObject.rndNum);
                     btn.setText("Sisesta number ja mängi uuesti"); //convert button GO to PLAY AGAIN
@@ -88,23 +106,22 @@ public class Guess extends Application{
                     engineObject.GenerateNumber();
                     i = 0;
 
-                } else
-                    {
+                } else {
                     //check entered number
-                    boolean isNumber= engineObject.kasNumber(field1.getText());
-                    if(isNumber == false){
+                    boolean isNumber = engineObject.kasNumber(field1.getText());
+                    if (isNumber == false) {
                         actiontarget.setText("See ei ole number, sisesta number!"); //if not a number
-                    } else{
+                    } else {
                         sisNum = Integer.parseInt(field1.getText()); //if number - convert to int
 
-                        if(sisNum>100 || sisNum <0) {
+                        if (sisNum > 100 || sisNum < 0) {
                             actiontarget.setText("Number peab olla vahemikus 0 - 100 !"); //
-                        } else{
+                        } else {
                             i++;
                             String answer = engineObject.Check(sisNum);
 
                             //if guessed
-                            if(answer == "Võit!"){
+                            if (answer == "Võit!") {
                                 actiontarget.setFill(Color.RED);
                                 actiontarget.setText("Yoy won! Congratulations!");
                                 btn.setText("Sisesta number ja mängi uuesti"); //convert button GO to PLAY AGAIN
@@ -113,10 +130,9 @@ public class Guess extends Application{
                                 i = 0;
 
                                 //if not guessed number
-                            }
-                            else {
+                            } else {
                                 actiontarget.setFill(Color.BLUE);
-                                actiontarget.setText(answer + ", left " + (tryNumber - i+1) + " tries!");//
+                                actiontarget.setText(answer + ", left " + (tryNumber - i + 1) + " tries!");//
                             }
                         }
 
