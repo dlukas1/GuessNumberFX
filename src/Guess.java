@@ -38,9 +38,9 @@ public class Guess extends Application {
         //make a bet before start
         TextField betField = new TextField("Sinu panus:");
         stack.getChildren().add(betField);
-        
+
         //Text field, width in css
-        TextField field1 = new TextField("Sisesta number 1 - 100 : ");
+        TextField field1 = new TextField();
         stack.getChildren().add(field1);
 
         //Create button GO
@@ -60,6 +60,10 @@ public class Guess extends Application {
         Label l = new Label("Proovi välja arvata number 1st 100ni! Sul on 5 katset!");
         stack.getChildren().add(l);
         l.setTranslateY(-70);
+
+        Label l2 = new Label("Sisesta number 1 - 100 : ");
+        stack.getChildren().add(l2);
+        l2.setTranslateY(-25);
 
         Label copyrights = new Label("Dmitri Lukas © 2016");
         stack.getChildren().add(copyrights);
