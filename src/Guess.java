@@ -28,13 +28,9 @@ public class Guess extends Application {
 
         //Create scene
         StackPane stack = new StackPane();
-
         Scene scene = new Scene(stack, 400, 200);
-
         primaryStage.setScene(scene);
-
         primaryStage.setTitle("-Guess Number-"); //Title
-
         primaryStage.getIcons().add(new Image("icon.png"));
         primaryStage.setResizable(false); //Window not resizable
         scene.getStylesheets().add((getClass().getResource("style.css")).toExternalForm());
@@ -42,18 +38,10 @@ public class Guess extends Application {
         //make a bet before start
         TextField betField = new TextField("Sinu panus:");
         stack.getChildren().add(betField);
-
-
+        
         //Text field, width in css
         TextField field1 = new TextField("Sisesta number 1 - 100 : ");
         stack.getChildren().add(field1);
-        field1.setPrefWidth(100);
-        field1.requestFocus();
-      /*  field1.setOnKeyPressed(event -> {
-            if(event.getCode().equals(KeyCode.ENTER)) {
-                Engine.Check()
-            }
-        });*/
 
         //Create button GO
         Button btn = new Button();
@@ -61,6 +49,12 @@ public class Guess extends Application {
         stack.getChildren().add(btn);//Add to stack
         btn.setTranslateY(50);
 
+        scene.setOnKeyPressed(event -> {
+            KeyCode code = event.getCode();
+            if (code == KeyCode.ENTER) {
+                btn.fire();
+            }
+        });
 
         //Directions how to play(remove after game started)
         Label l = new Label("Proovi välja arvata number 1st 100ni! Sul on 5 katset!");
@@ -123,7 +117,7 @@ public class Guess extends Application {
                             //if guessed
                             if (answer == "Võit!") {
                                 actiontarget.setFill(Color.RED);
-                                actiontarget.setText("Yoy won! Congratulations!");
+                                actiontarget.setText("SINA VÕITSID! ÕNNITLEN!");
                                 btn.setText("Sisesta number ja mängi uuesti"); //convert button GO to PLAY AGAIN
                                 field1.clear();
                                 engineObject.GenerateNumber();
@@ -133,6 +127,7 @@ public class Guess extends Application {
                             } else {
                                 actiontarget.setFill(Color.BLUE);
                                 actiontarget.setText(answer + ", left " + (tryNumber - i + 1) + " tries!");//
+                                field1.clear();
                             }
                         }
 
